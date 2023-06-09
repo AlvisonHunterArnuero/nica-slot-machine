@@ -13,6 +13,10 @@ body {
     @apply my-8 transition ease-in-out duration-150 border-2 p-6 uppercase font-medium w-1/2 text-5xl rounded-md cursor-pointer bg-indigo-900;
 }
 
+.spinButton:hover {
+    @apply text-gray-100;
+}
+
 .winNotification {
     @apply uppercase font-extrabold text-6xl text-red-600 my-5;
 }
