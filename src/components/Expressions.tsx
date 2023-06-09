@@ -1,6 +1,5 @@
-type  ExpressionsProps = {
-currentEmotionalExpression: string;
-}
+import { ExpressionsProps } from "../Types"
+
 export const Expressions = ({currentEmotionalExpression}:ExpressionsProps) => {
   return (
        <div className='flex flex-row my-4'>

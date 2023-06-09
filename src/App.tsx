@@ -4,6 +4,7 @@ import { WinNotification } from './components/WinNotification';
 import { SlotMachine } from './components/SlotMachine';
 import { MainTitle } from './components/MainTitle';
 import { Expressions } from './components/Expressions';
+import { SpinButton } from './components/SpinButton';
 
 function App() {
   const [isClicked, setIsClicked] = useState<boolean>(false);
@@ -47,18 +48,13 @@ function App() {
   };
 
   return (
-    <>
-      <div className='h-fit w-full my-4 flex flex-col justify-center items-center'>
+      <div className='mainWrapper'>
         <MainTitle title="Nica Slot Machine" />
         <Expressions currentEmotionalExpression={currentEmotionalExpression} />
         <WinNotification hasWon={hasWon} />
         <SlotMachine elements={elements} />
-        <button onClick={handleClick} className='my-8 transition ease-in-out duration-150 border-2 p-6 uppercase font-medium
-       w-1/2 bg-indigo-500 text-5xl rounded-md shadow-xs cursor-pointer hover:bg-indigo-900 hover:text-gray-100'>
-          {hasWon ? "Restart Game" : "Spin It!"}
-        </button>
+        <SpinButton handleClick={handleClick} hasWon={hasWon} />
       </div>
-    </>
   )
 }
 

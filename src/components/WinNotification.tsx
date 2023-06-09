@@ -1,11 +1,8 @@
-import React from 'react'
+import { WinNotificationProps } from "../Types"
 
-type WinNotificationProps ={
-  hasWon: boolean;
-}
-export const WinNotification = ({hasWon}:WinNotificationProps) => {
+export const WinNotification = ({ hasWon }: WinNotificationProps) => {
   return (
-    <div className='w-full'>{hasWon && <p className='uppercase font-extrabold text-6xl text-red-600 my-5'>
-          You Win, fool!</p>}</div>
+    <div className='w-full'>{hasWon && <p className='winNotification'>
+      You Win, fool!</p>}</div>
   )
 }
