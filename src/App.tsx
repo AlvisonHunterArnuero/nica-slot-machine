@@ -1,46 +1,33 @@
-import { useState } from "react";
-import "./App.css";
-import { WinNotification } from "./components/WinNotification";
-import { SlotMachine } from "./components/SlotMachine";
-import { MainTitle } from "./components/MainTitle";
-import { Expressions } from "./components/Expressions";
-import { SpinButton } from "./components/SpinButton";
+import { useState } from 'react';
+import './App.css';
+import { WinNotification } from './components/WinNotification';
+import { SlotMachine } from './components/SlotMachine';
+import { MainTitle } from './components/MainTitle';
+import { Expressions } from './components/Expressions';
+import { SpinButton } from './components/SpinButton';
+import { getRandomArrElement } from './Helpers/customFn';
 
 function App() {
-  const [isClicked, setIsClicked] = useState<boolean>(false);
   const [hasWon, setHasWon] = useState<boolean>(false);
   const [elements, setElements] = useState<number[]>([1, 1, 1]);
   const [currentEmotionalExpression, setCurrentEmotionalExpression] =
-    useState<string>("doubt");
-
-  const getRandomArrElement = (): Record<string, number> => {
-    const arrPrizes: number[] = [1, 2, 3];
-    const firstRndItem: number =
-      arrPrizes[Math.floor(Math.random() * arrPrizes.length)];
-    const secondRndItem: number =
-      arrPrizes[Math.floor(Math.random() * arrPrizes.length)];
-    const thirdRndItem: number =
-      arrPrizes[Math.floor(Math.random() * arrPrizes.length)];
-    isClicked && setIsClicked(false);
-    return {
-      firstRndItem: firstRndItem,
-      secondRndItem: secondRndItem,
-      thirdRndItem: thirdRndItem,
-    };
-  };
+    useState<string>('doubt');
+  const winSound = new Audio('/audios/win.wav');
+  const spinSound = new Audio('/audios/spin.wav');
 
   const handleClick = (): void => {
+    spinSound.play();
     if (hasWon) {
       setHasWon(false);
     }
     const { firstRndItem, secondRndItem, thirdRndItem } = getRandomArrElement();
     setElements([firstRndItem, secondRndItem, thirdRndItem]);
     if (firstRndItem === secondRndItem) {
-      setCurrentEmotionalExpression("what");
+      setCurrentEmotionalExpression('what');
     } else if (firstRndItem === thirdRndItem) {
-      setCurrentEmotionalExpression("uff");
+      setCurrentEmotionalExpression('uff');
     } else {
-      setCurrentEmotionalExpression("mad");
+      setCurrentEmotionalExpression('mad');
     }
     const winner =
       (firstRndItem === secondRndItem) === true &&
@@ -48,10 +35,10 @@ function App() {
         ? true
         : false;
     if (winner === true) {
+      winSound.play();
       setHasWon(true);
-      setCurrentEmotionalExpression("happy");
+      setCurrentEmotionalExpression('happy');
     }
-    setIsClicked(true);
   };
 
   return (
