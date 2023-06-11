@@ -1,5 +1,5 @@
 export type SpinButtonProps = {
-  handleClick: () => void;
+  spinBtnClickHandler: () => void;
   hasWon: boolean;
 };
 
@@ -18,3 +18,15 @@ export type SlotMachineProps = {
 export type WinNotificationProps = {
   hasWon: boolean;
 };
+
+export type PrizeRecord = {
+  firstRndItem: number;
+  secondRndItem: number;
+  thirdRndItem: number;
+};
+
+export type verifyWinnerProps = {
+  elements: number[];
+};
+
+export type EmotionalExpression = 'happy' | 'what' | 'uff' | 'doubt' | 'mad';

@@ -5,39 +5,38 @@ import { SlotMachine } from './components/SlotMachine';
 import { MainTitle } from './components/MainTitle';
 import { Expressions } from './components/Expressions';
 import { SpinButton } from './components/SpinButton';
-import { getRandomArrElement } from './Helpers/customFn';
+import { getRandomArrElement, playSound } from './Helpers/customFn';
+import { EmotionalExpression } from './Types';
+
+// Audios for the spin and win sounds
+const winSound = new Audio('/audios/win.wav');
+const spinSound = new Audio('/audios/spin.wav');
 
 function App() {
   const [hasWon, setHasWon] = useState<boolean>(false);
-  const [elements, setElements] = useState<number[]>([1, 1, 1]);
-  const [currentEmotionalExpression, setCurrentEmotionalExpression] =
-    useState<string>('doubt');
-  const winSound = new Audio('/audios/win.wav');
-  const spinSound = new Audio('/audios/spin.wav');
+  const [elements, setElements] = useState<number[]>([8, 8, 8]);
+  const [currentEmotionalExpression, setCurrentEmotionalExpression] = useState<EmotionalExpression>('doubt');
 
-  const handleClick = (): void => {
-    spinSound.play();
-    if (hasWon) {
-      setHasWon(false);
-    }
+  const spinBtnClickHandler = (): void => {
+    hasWon && setHasWon(false);
+    playSound(spinSound);
     const { firstRndItem, secondRndItem, thirdRndItem } = getRandomArrElement();
     setElements([firstRndItem, secondRndItem, thirdRndItem]);
     if (firstRndItem === secondRndItem) {
       setCurrentEmotionalExpression('what');
     } else if (firstRndItem === thirdRndItem) {
       setCurrentEmotionalExpression('uff');
+    } else if (secondRndItem === thirdRndItem) {
+      setCurrentEmotionalExpression('doubt');
     } else {
       setCurrentEmotionalExpression('mad');
     }
     const winner =
-      (firstRndItem === secondRndItem) === true &&
-      (secondRndItem === thirdRndItem) === true
-        ? true
-        : false;
+      (firstRndItem === secondRndItem) === true && (secondRndItem === thirdRndItem) === true ? true : false;
     if (winner === true) {
-      winSound.play();
       setHasWon(true);
       setCurrentEmotionalExpression('happy');
+      playSound(winSound);
     }
   };
 
@@ -47,7 +46,7 @@ function App() {
       <Expressions currentEmotionalExpression={currentEmotionalExpression} />
       <WinNotification hasWon={hasWon} />
       <SlotMachine elements={elements} />
-      <SpinButton handleClick={handleClick} hasWon={hasWon} />
+      <SpinButton spinBtnClickHandler={spinBtnClickHandler} hasWon={hasWon} />
     </div>
   );
 }

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,34 +9,50 @@ body {
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
-  color: white;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
 }
 
-.spinButton {
-  @apply my-8 transition ease-in-out duration-150 border-2 p-6 uppercase font-medium w-1/2 text-5xl rounded-md cursor-pointer bg-indigo-900;
+@layer base {
+  html {
+    font-family: 'Anton', sans-serif;
+    color: white;
+  }
 }
 
-.spinButton:hover {
-  @apply text-gray-100;
+@layer components {
+  .spinButton {
+    @apply my-8 transition ease-in-out duration-150 border-2 p-6 uppercase font-medium w-1/2 text-5xl rounded-md cursor-pointer bg-indigo-900;
+  }
+
+  .spinButton:hover {
+    @apply text-gray-100;
+  }
+
+  .winNotification {
+    @apply uppercase font-extrabold text-6xl text-blue-1000 my-5;
+  }
+
+  .spinners {
+    @apply w-48 h-48 shadow-lg rounded-lg drop-shadow-2xl;
+  }
+
+  .mainTitle {
+    @apply text-purple-500 text-center text-7xl leading-tight mx-auto;
+  }
+
+  .mainWrapper {
+    @apply h-fit w-full my-4 flex flex-col justify-center items-center;
+  }
+
+  /* Two examples for spinner rules, one for phone and the other one with media queries */
+  .spinnerContainer {
+    @apply flex flex-col gap-20 p-24 bg-sky-500 items-center justify-center bg-opacity-30 backdrop-blur-sm rounded-lg border-2 border-gray-300;
+  }
+
+  @screen md {
+    .spinnerContainer {
+      @apply flex-row items-center justify-center bg-sky-500;
+    }
+  }
 }
 
-.winNotification {
-  @apply uppercase font-extrabold text-6xl text-blue-1000 my-5;
-}
-
-.spinners {
-  @apply w-48 h-48 shadow-lg rounded-lg drop-shadow-2xl;
-}
-
-.mainTitle {
-  @apply text-purple-500 text-center text-8xl mx-auto;
-}
-
-.mainWrapper {
-  @apply h-fit w-full my-4 flex flex-col justify-center items-center;
-}
-
-.spinnerContainer {
-  @apply flex flex-col md:flex-row gap-20 p-24 bg-sky-500 items-center justify-center bg-opacity-30 backdrop-blur-sm rounded-lg border-2 border-gray-300;
-}
+/* End of layers components */
