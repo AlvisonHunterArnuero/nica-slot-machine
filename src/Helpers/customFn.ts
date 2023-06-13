@@ -17,10 +17,12 @@ export const verifyWinner = ({ elements }: verifyWinnerProps) => {
   return result;
 };
 
-export const playSound = async (args: HTMLAudioElement): Promise<void> => {
+export const playSound = async (args: HTMLAudioElement, playForever: boolean, volume: number): Promise<void> => {
   args.pause();
   args.currentTime = 0;
+  args.volume = volume || 1.0;
   args.play();
+  args.loop = playForever;
 };
 
 export const getEmotionalExpression = ({
