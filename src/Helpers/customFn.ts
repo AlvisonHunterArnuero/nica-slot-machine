@@ -1,9 +1,10 @@
-import { PrizeRecord, verifyWinnerProps } from '../Types';
-export const getRandomArrElement = (): PrizeRecord => {
-  const arrPrizes: number[] = [1, 2, 3];
-  const firstRndItem: number = arrPrizes[Math.floor(Math.random() * arrPrizes.length)];
-  const secondRndItem: number = arrPrizes[Math.floor(Math.random() * arrPrizes.length)];
-  const thirdRndItem: number = arrPrizes[Math.floor(Math.random() * arrPrizes.length)];
+import { EmotionalExpression, EmotionalExpressionProps, verifyWinnerProps } from '../Types';
+
+export const getRandomArrElement = (): EmotionalExpressionProps => {
+  const arrSlotMachineReelSymbols: number[] = [1, 2, 3];
+  const firstRndItem: number = arrSlotMachineReelSymbols[Math.floor(Math.random() * arrSlotMachineReelSymbols.length)];
+  const secondRndItem: number = arrSlotMachineReelSymbols[Math.floor(Math.random() * arrSlotMachineReelSymbols.length)];
+  const thirdRndItem: number = arrSlotMachineReelSymbols[Math.floor(Math.random() * arrSlotMachineReelSymbols.length)];
   return {
     firstRndItem,
     secondRndItem,
@@ -20,4 +21,28 @@ export const playSound = async (args: HTMLAudioElement): Promise<void> => {
   args.pause();
   args.currentTime = 0;
   args.play();
+};
+
+export const getEmotionalExpression = ({
+  firstRndItem,
+  secondRndItem,
+  thirdRndItem,
+}: EmotionalExpressionProps): EmotionalExpression => {
+  let emotionalExpression: EmotionalExpression;
+
+  switch (true) {
+    case firstRndItem === secondRndItem:
+      emotionalExpression = 'what';
+      break;
+    case firstRndItem === thirdRndItem:
+      emotionalExpression = 'uff';
+      break;
+    case secondRndItem === thirdRndItem:
+      emotionalExpression = 'doubt';
+      break;
+    default:
+      emotionalExpression = 'mad';
+  }
+
+  return emotionalExpression;
 };

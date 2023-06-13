@@ -5,7 +5,7 @@ import { SlotMachine } from './components/SlotMachine';
 import { MainTitle } from './components/MainTitle';
 import { Expressions } from './components/Expressions';
 import { SpinButton } from './components/SpinButton';
-import { getRandomArrElement, playSound } from './Helpers/customFn';
+import { getEmotionalExpression, getRandomArrElement, playSound } from './Helpers/customFn';
 import { EmotionalExpression } from './Types';
 
 // Audios for the spin and win sounds
@@ -22,18 +22,12 @@ function App() {
     playSound(spinSound);
     const { firstRndItem, secondRndItem, thirdRndItem } = getRandomArrElement();
     setElements([firstRndItem, secondRndItem, thirdRndItem]);
-    if (firstRndItem === secondRndItem) {
-      setCurrentEmotionalExpression('what');
-    } else if (firstRndItem === thirdRndItem) {
-      setCurrentEmotionalExpression('uff');
-    } else if (secondRndItem === thirdRndItem) {
-      setCurrentEmotionalExpression('doubt');
-    } else {
-      setCurrentEmotionalExpression('mad');
-    }
-    const winner =
-      (firstRndItem === secondRndItem) === true && (secondRndItem === thirdRndItem) === true ? true : false;
-    if (winner === true) {
+
+    const currEmotion: EmotionalExpression = getEmotionalExpression({ firstRndItem, secondRndItem, thirdRndItem });
+    setCurrentEmotionalExpression(currEmotion);
+
+    const winner = firstRndItem === secondRndItem && secondRndItem === thirdRndItem;
+    if (winner) {
       setHasWon(true);
       setCurrentEmotionalExpression('happy');
       playSound(winSound);

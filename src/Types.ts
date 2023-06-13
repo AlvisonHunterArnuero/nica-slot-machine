@@ -19,7 +19,7 @@ export type WinNotificationProps = {
   hasWon: boolean;
 };
 
-export type PrizeRecord = {
+export type EmotionalExpressionProps = {
   firstRndItem: number;
   secondRndItem: number;
   thirdRndItem: number;
