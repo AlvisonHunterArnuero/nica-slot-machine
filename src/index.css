@@ -3,56 +3,66 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background-color: #232323;
-  background-image: url('/src/assets/imgs/bg-slot.jpeg');
-  background-position: center;
-  background-size: cover;
-  background-repeat: no-repeat;
+:root {
+  --color-primary: #054143;
+  --color-secondary: #444422;
+  --color-dark: #232323;
+  --color-light: #f3f6f4;
 }
 
+/*----------- CUSTOM RULES ----------*/
 @layer base {
   html {
     font-family: 'Anton', sans-serif;
-    color: white;
+    color: var(--color-light);
+  }
+
+  body {
+    background-color: var(--color-dark);
+    background-image: url('/src/assets/imgs/bg-slot.jpeg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
 }
 
+/* End of base layer */
+
 @layer components {
-  .spinButton {
+  .custom-spin-btn {
     @apply my-8 transition ease-in-out duration-150 border-2 p-6 uppercase font-medium w-1/2 text-5xl rounded-md cursor-pointer bg-indigo-900;
   }
 
-  .spinButton:hover {
+  .custom-spin-btn:hover {
     @apply text-gray-100;
   }
 
-  .winNotification {
+  .custom-win-notification {
     @apply uppercase font-extrabold text-6xl text-blue-1000 my-5;
   }
 
-  .spinners {
+  .custom-spinners-size-and-shape {
     @apply w-48 h-48 shadow-lg rounded-lg drop-shadow-2xl;
   }
 
-  .mainTitle {
+  .custom-main-title-styles {
     @apply text-purple-500 text-center text-7xl leading-tight mx-auto;
   }
 
-  .mainWrapper {
+  .custom-main-wrapper-styles {
     @apply h-fit w-full my-4 flex flex-col justify-center items-center;
   }
 
   /* Two examples for spinner rules, one for phone and the other one with media queries */
-  .spinnerContainer {
+  .custom-spinner-container-styles {
     @apply flex flex-col gap-20 p-24 bg-sky-500 items-center justify-center bg-opacity-30 backdrop-blur-sm rounded-lg border-2 border-gray-300;
   }
 
   @screen md {
-    .spinnerContainer {
+    .custom-spinner-container-styles {
       @apply flex-row items-center justify-center bg-sky-500;
     }
   }
 }
 
-/* End of layers components */
+/* End of components layer */

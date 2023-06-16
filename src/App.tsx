@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 import { WinNotification } from './components/WinNotification';
 import { SlotMachine } from './components/SlotMachine';
@@ -11,16 +11,12 @@ import { EmotionalExpression } from './Types';
 // Audios for the spin and win sounds
 const winSound = new Audio('/audios/win.wav');
 const spinSound = new Audio('/audios/spin.wav');
-const bgMusic = new Audio('/audios/bg-music.mp3');
 
 function App() {
   const [hasWon, setHasWon] = useState<boolean>(false);
   const [elements, setElements] = useState<number[]>([8, 8, 8]);
   const [currentEmotionalExpression, setCurrentEmotionalExpression] = useState<EmotionalExpression>('doubt');
 
-  useEffect(() => {
-    playSound(bgMusic, true, 0.5);
-  }, []);
   const spinBtnClickHandler = (): void => {
     hasWon && setHasWon(false);
     playSound(spinSound, false, 1.0);
@@ -39,7 +35,7 @@ function App() {
   };
 
   return (
-    <div className="mainWrapper">
+    <div className="custom-main-title-styles">
       <MainTitle title="Nica Slot Machine" />
       <Expressions currentEmotionalExpression={currentEmotionalExpression} />
       <WinNotification hasWon={hasWon} />

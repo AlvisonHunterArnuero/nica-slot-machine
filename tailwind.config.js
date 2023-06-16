@@ -4,6 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: 'var(--color-primary)',
+        secondary: 'var(--color-secondary)',
+        dark: 'var(--color-dark)',
+        light: 'var(--color-light)',
         blue: {
           1000: '#14b5e7',
         },
@@ -28,5 +32,6 @@ export default {
       },
     },
   },
+  variants: {},
   plugins: [],
 };
