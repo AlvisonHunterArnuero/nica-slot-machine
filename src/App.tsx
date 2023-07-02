@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { ErrorBoundary } from 'react-error-boundary';
 import './App.css';
 import { WinNotification } from './components/WinNotification';
 import { SlotMachine } from './components/SlotMachine';
@@ -11,6 +12,26 @@ import { EmotionalExpression } from './Types';
 // Audios for the spin and win sounds
 const winSound = new Audio('/audios/win.wav');
 const spinSound = new Audio('/audios/spin.wav');
+
+type TErrorObjTypeProperties = {
+  message: string;
+};
+
+type TfbRenderProps = {
+  error: TErrorObjTypeProperties;
+};
+const fallbackRender = ({ error }: TfbRenderProps): JSX.Element => {
+  const { message } = error;
+  const stl = {
+    color: 'red',
+  };
+  return (
+    <div role="alert">
+      <p>Something went wrong:</p>
+      <pre style={stl}>{message}</pre>
+    </div>
+  );
+};
 
 function App() {
   const [hasWon, setHasWon] = useState<boolean>(false);
@@ -33,15 +54,18 @@ function App() {
       playSound(winSound, false, 1.0);
     }
   };
-
   return (
-    <div className="custom-main-title-styles">
-      <MainTitle title="Nica Slot Machine" />
-      <Expressions currentEmotionalExpression={currentEmotionalExpression} />
-      <WinNotification hasWon={hasWon} />
-      <SlotMachine elements={elements} />
-      <SpinButton spinBtnClickHandler={spinBtnClickHandler} hasWon={hasWon} />
-    </div>
+    <ErrorBoundary fallback={fallbackRender as unknown as JSX.Element}>
+      <>
+        <div className="custom-main-title-styles">
+          <MainTitle title="Nica Slot Machine" />
+          <Expressions currentEmotionalExpression={currentEmotionalExpression} />
+          <WinNotification hasWon={hasWon} />
+          <SlotMachine elements={elements} />
+          <SpinButton spinBtnClickHandler={spinBtnClickHandler} hasWon={hasWon} />
+        </div>
+      </>
+    </ErrorBoundary>
   );
 }
 
